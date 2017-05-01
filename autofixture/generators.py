@@ -80,6 +80,15 @@ class StaticGenerator(Generator):
     def generate(self):
         return self.value
 
+class DynamicGenerator(Generator):
+    def __init__(self, func, *args, **kwargs):
+        self.my_func = func
+        self.my_args = args 
+
+    def generate(self):
+        output = self.my_func(*self.my_args)    
+        return output
+
 
 class CallableGenerator(Generator):
     def __init__(self, value, args=None, kwargs=None, *xargs, **xkwargs):
