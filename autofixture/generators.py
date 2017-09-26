@@ -15,7 +15,7 @@ import re
 import string
 import sys
 from decimal import Decimal
-
+from faker import Faker
 
 if sys.version_info[0] < 3:
     str_ = unicode
@@ -361,6 +361,21 @@ class FirstNameGenerator(Generator):
         else:
             return random.choice(self.all)
 
+class CustomFirstNameGenerator(Generator):
+    """ Generates a first name, either male or female """
+
+    def __init__(self, gender=None):
+        self.gender = gender
+        self.all = self.male + self.female
+
+    def generate(self):
+        fake = Faker()
+        if self.gender == 'm':
+            return fake.first_name()
+        elif self.gender == 'f':
+            return fake.first_name()
+        else:
+            return fake.first_name()
 
 class LastNameGenerator(Generator):
     """ Generates a last name """
